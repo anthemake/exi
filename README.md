@@ -20,7 +20,7 @@ A web application that grabs currency exchange rates comparing them against the 
 ## Technologies Used
 - **Frontend**: Next.JS, React, Tailwind CSS, TypeScript
 - **Backend**: Node.js
-- **API**: openexchangerates
+- **API**: openexchangerates, Yahoo Finance
 
 ## Installation
 1. Clone the repository:
