@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const Currency = () => {
   const [currencyData, setCurrencyData] = useState({});
   const updateCurrencyContainer = async () => {
-    const oapiUrl = process.env.NEXT_PUBLIC_OAPI_URL;
+    const oapiUrl = process.env.OAPI_URL;
     const options = { method: "GET", headers: { accept: "application/json" } };
 
     try {
