@@ -3,11 +3,10 @@ import React, { useEffect, useState } from "react";
 const Currency = () => {
   const [currencyData, setCurrencyData] = useState({});
   const updateCurrencyContainer = async () => {
-    const oapiUrl = process.env.OAPI_URL;
-    const options = { method: "GET", headers: { accept: "application/json" } };
+  
 
     try {
-      const response = await fetch(oapiUrl, options);
+      const response = await fetch("/api/currency");
       const data = await response.json();
       setCurrencyData(data.rates || {});
     } catch (error) {

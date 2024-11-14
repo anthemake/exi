@@ -3,14 +3,6 @@ import React, { useEffect, useState } from "react";
 const News = () => {
   const [newsItems, setNewsItems] = useState([]);
 
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-      "X-RapidAPI-Host": process.env.RAPIDAPI_HOST,
-    },
-  };
-
   const limitDescription = (description, limit = 20) => {
     const words = description?.split(" ") || [];
     return words.length > limit
@@ -21,18 +13,9 @@ const News = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await fetch(
-          "https://yahoo-finance15.p.rapidapi.com/api/v1/markets/news?tickers=USD",
-          options
-        );
+        const response = await fetch("/api/news"); 
         const data = await response.json();
-
-        console.log("API Response:", data);
-        console.log("Available keys in response:", Object.keys(data));
-
-        const latestNewsItems = data?.body?.slice(0, 8) || [];
-        console.log("News Items:", latestNewsItems);
-        setNewsItems(latestNewsItems);
+        setNewsItems(data);
       } catch (error) {
         console.error("Error fetching news:", error);
       }
@@ -46,8 +29,6 @@ const News = () => {
       {newsItems.length > 0 ? (
         newsItems.map((newsItem, index) => {
           const { title, description, link, pubDate } = newsItem;
-          console.log("Rendering news item:", newsItem);
-
           const pubDateObj = pubDate ? new Date(pubDate) : null;
           const formattedPubDate = pubDateObj
             ? pubDateObj.toLocaleDateString("en-US", {
